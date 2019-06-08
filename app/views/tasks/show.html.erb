@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @task.project.name %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @task.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @task.description %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @task.status %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @task.user.email %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @task.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @task.end_date %>
+</p>
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Back', tasks_path %>
+
+<hr/><h3><b>Comments</b></h3><hr/>
+<div data-id="reply">
+  <%= render partial: "comments/form" %>
+</div>
+<div class="container">
+  <div data-id="link-wrap">
+    <%= render(@comments) %>
+  </div>
+  <% if @comments.next_page %>
+    <div data-id="comment-more">
+      <%= link_to 'Load More', task_comments_path(@task.id,page: @comments.next_page), remote: true,data: {id: "next-page"} %>
+    </div>
+  <% end %>
+</div>
